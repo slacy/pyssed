@@ -12,11 +12,15 @@ Description:
 This is a simple library for expressing CSS selectors & rules in Python, and
 generating a syntactically correct CSS file as output.
 
+It was written for easy inclusion and use from virtually any web framework:
+Pylons, web2py, Django, etc.  It's just a Python library, and not tied to
+any framework in particular.
+
 
 Background:
 ===========
-When doing web development, the developer must work in several languages and
-syntaxes concurently.  Typically, you will have 4 or more languages to work with:
+When doing web development, one must work in several languages and syntaxes
+concurently.  Typically, you will have 4 or more languages to work with:
 
 - Python (or whatever language you're using for your backend)
 - HTML
@@ -26,22 +30,35 @@ syntaxes concurently.  Typically, you will have 4 or more languages to work with
 Often times, context switching between languages can lead to simple editing
 mistakes, like missing (or adding) semicolons at the end of lines, etc.
 
-In addition, CSS is a very lightweight syntax, missing many key features.  Because of this, several CSS helper libraries have arisen.  For example:
+In addition, CSS is a very lightweight syntax, missing many key features.
+Because of this, several CSS helper libraries and alternate syntaxes have
+arisen.  For example:
 
-Less CSS: "Leaner CSS" http://lesscss.org/
-Sass: "Style with attitude" http://sass-lang.com/
-Clever CSS: "the pythonic way of webdesign" http://sandbox.pocoo.org/clevercss/
+Less CSS: "Leaner CSS"
+http://lesscss.org/
+
+Sass: "Style with attitude"
+http://sass-lang.com/
+
+Clever CSS: "the pythonic way of webdesign"
+http://sandbox.pocoo.org/clevercss/
 
 But, none of these helper libraries actually use native Python for
-generating the CSS itself.
+generating the CSS itself, and all of them are just "another language" with
+some CSS-isms and a few extensions.  This just compounds the problem even
+more.
 
-And thus, I have created pyssed.
+I want to write my stylesheets in Python.  I have a web framework that can
+take Python and generate HTML, so why not have it generate syntactically
+correct CSS as well?
+
+That's exactly what pyssed is for.
 
 Examples:
 =========
 
 # A trivial example of pyssed
-# See actual source in examples/simple.py
+# See actual source in pyssed/examples/simple.py
 
 import pyssed
 
@@ -62,12 +79,12 @@ a:hover {
 """
 
 In addition, because it's pure Python, pyssed's syntax is as flexible as the
-language itself, and inherently supports most of the features of the
+language itself, and automatically supports all of the features of the
 previously mentioned CSS helpers. Here's an example showing off lots of
-pyssed's features, include variables, mixins, nested styles, and style
-reuse.
+pyssed's features, include variables, arithmetic, mixins, nested styles, and
+style reuse.
 
-# See source in examples/everything.py
+# See source in pyssed/examples/everything.py
 import pyssed
 
 site_background = "#123450"
