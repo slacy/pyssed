@@ -41,14 +41,17 @@ Examples:
 =========
 
 # A trivial example of pyssed
+# See actual source in examples/simple.py
 
 import pyssed
 
-print '\n'.join(pyssed.generate(css={
-  'a:hover': {
-    'font-weight': 'bold',
-  }
-}))
+css = {
+    'a:hover': {
+        'font-weight': 'bold',
+    }
+}
+
+print '\n'.join(pyssed.generate(css))
 
 will generate the CSS:
 
@@ -59,24 +62,27 @@ a:hover {
 """
 
 In addition, because it's pure Python, pyssed's syntax is as flexible as the
-language itself, and inherently supports most of the features of the other
-CSS helper libraries. Here's an example showing off lots of pyssed's
-features, include variables, mixins, nested styles, and style reuse.
+language itself, and inherently supports most of the features of the
+previously mentioned CSS helpers. Here's an example showing off lots of
+pyssed's features, include variables, mixins, nested styles, and style
+reuse.
 
-pyssed
+# See source in examples/everything.py
+import pyssed
 
-red = pyssed.style('color: red')
+site_background = "#123450"
+red = pyssed.style('color: red;')
 blue = pyssed.style(color='blue')
 green = {'color': 'green'}
-bold = pyssed.style('font-weight: bold')
+bold = pyssed.style('font-weight: bold;')
 red_bold = red + bold
 
 
 def rounded(radius):
     return pyssed.style({
         'border-radius': radius,
-        '-moz-border-radius': radius,
-        '-webkit-border-radius': radius,
+        '-moz-border-radius': int(round(radius * 1.5)),
+        '-webkit-border-radius': int(round(radius * 2.0)),
         })
 
 css = {
@@ -84,18 +90,20 @@ css = {
     '.green': green,
     'ul li': rounded(3) + blue + {
         'font-style': 'italic',
+        'background': site_background,
     },
-    'div.ground': rounded(7) + green + {
+    'div.ground': rounded(7) + red_bold + {
         'p': {
             'text-align': 'left',
-            'em' : {
-                'font-size': '14pt'
+            'em': {
+                'font-size': '14pt',
+                'background': site_background,
             }
         },
     }
 }
 
-print '\n'.join(pyssed.generate(css=css))
+print '\n'.join(pyssed.generate(css))
 
 Which will generate the following CSS (item ordering may vary):
 
@@ -106,9 +114,10 @@ Which will generate the following CSS (item ordering may vary):
 
 div.ground {
     border-radius: 7px;
-    color: green;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
+    color: red;
+    font-weight: bold;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 11px;
 }
 
 div.ground p {
@@ -117,6 +126,7 @@ div.ground p {
 
 div.ground p em {
     font-size: 14pt;
+    background: #123450;
 }
 
 .blue {
@@ -125,9 +135,10 @@ div.ground p em {
 
 ul li {
     border-radius: 3px;
+    background: #123450;
     color: blue;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 5px;
     font-style: italic;
 }
 """

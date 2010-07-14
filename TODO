@@ -1,0 +1,21 @@
+Tons of stuff to do:
+
+- CSS validation.
+   - Make sure all generated CSS styles are correct.
+   - Make sure all colors, percentages, etc. are correct.
+
+- First class types for lots more things
+   - Color type (supports arithmetic)
+   - Percentage type (postpend '%', support arithmetic, do range checking)
+   - em's, ex's, etc. for other CSS units.
+   - margins.  Smart (and correct CSS) behavior for something like this:
+       m1 = pyssed.style('margin: 3px')
+       m2 = m1 + pyssed.style('margin-right: 0px')
+
+       when used, m2 should output something like "margin: 3 0 3 3"
+   - Borders (see support for margins)
+   - fonts.  Support the single-line font syntax automatically.
+
+- Better ordering
+   - Use OrderedDict or something so that output ordering is predictable and
+     matches the way it's specified in Python.

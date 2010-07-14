@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import copy
 
 
 class style(object):
@@ -7,7 +8,7 @@ class style(object):
     def __init__(self, *args, **kwargs):
         self._styles = {}
         for a in args:
-            self.__add__(a)
+            self.append(a)
 
         for name, value in kwargs.iteritems():
             self._styles[name] = value
@@ -15,23 +16,27 @@ class style(object):
     def iteritems(self):
         return self._styles.iteritems()
 
+    def append(self, other):
+        self._styles = self.__add__(other)._styles
+
     def __add__(self, other):
+        summed = copy.deepcopy(self)
         if isinstance(other, str):
             single = other.split(':')
-            self._styles[single[0]] = single[1]
+            summed._styles[single[0]] = single[1]
         elif isinstance(other, dict):
-            self._styles.update(other)
+            summed._styles.update(other)
         elif isinstance(other, style):
-            self._styles.update(other._styles)
+            summed._styles.update(other._styles)
         else:
             raise "Bad type for style"
-        return self
+        return summed
 
     def __repr__(self):
         return str(self._styles)
 
 
-def generate(parent='', css=None):
+def generate(css, parent=''):
     indent = 4
     subnodes = []
     stylenodes = []
@@ -42,7 +47,9 @@ def generate(parent='', css=None):
         if isinstance(value, dict) or isinstance(value, style):
             subnodes.append((name, value))
         # Else, it's a string, and thus, a single style element
-        elif isinstance(value, str) or isinstance(value, int):
+        elif (isinstance(value, str)
+              or isinstance(value, int)
+              or isinstance(value, float)):
             stylenodes.append((name, value))
         else:
             raise "Bad error"
@@ -64,7 +71,7 @@ def generate(parent='', css=None):
         result.append("}\n")
 
     for subnode in subnodes:
-        result += generate(parent=(parent.strip() + ' ' + subnode[0]).strip(),
-                           css=subnode[1])
+        result += generate(subnode[1],
+                           parent=(parent.strip() + ' ' + subnode[0]).strip())
 
     return result
