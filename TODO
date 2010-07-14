@@ -19,3 +19,14 @@ Tons of stuff to do:
 - Better ordering
    - Use OrderedDict or something so that output ordering is predictable and
      matches the way it's specified in Python.
+
+- Better support for pseudo-attributes :hover, :visited, etc.
+   - There should be a nice syntax for this where you don't have to repeat
+     yourself so much.
+
+- Better error messages
+   - Current error messages are really really weak.
+
+- Support for more operators
+   - "-" operator __sub__() should work as you might expect it to
+   - "&" should be the same as "+"

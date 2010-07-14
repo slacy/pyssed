@@ -29,7 +29,7 @@ class style(object):
         elif isinstance(other, style):
             summed._styles.update(other._styles)
         else:
-            raise "Bad type for style"
+            raise 'Bad type for style'
         return summed
 
     def __repr__(self):
@@ -52,10 +52,10 @@ def generate(css, parent=''):
               or isinstance(value, float)):
             stylenodes.append((name, value))
         else:
-            raise "Bad error"
+            raise 'Bad error'
 
     if stylenodes:
-        result.append(parent.strip() + " {")
+        result.append(parent.strip() + ' {')
         for stylenode in stylenodes:
             attribute = stylenode[0].strip(' ;:')
             if isinstance(stylenode[1], str):
@@ -65,10 +65,11 @@ def generate(css, parent=''):
                 # everything else (int or float, likely)
                 value = str(stylenode[1]) + 'px'
 
-            result.append(' ' * indent + "%s: %s;" % (
+            result.append(' ' * indent + '%s: %s;' % (
                     attribute, value))
 
-        result.append("}\n")
+        result.append('}')
+        result.append('') # a newline
 
     for subnode in subnodes:
         result += generate(subnode[1],
