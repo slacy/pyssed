@@ -40,8 +40,9 @@ class style(object):
         return str(self._styles)
 
 
-def generate(css, parent=''):
-    indent = 4
+def generate(css, parent='', indent=4):
+    """Given a dict mapping CSS selectors to a dict of styles, generate a
+    list of lines of CSS output."""
     subnodes = []
     stylenodes = []
     result = []
