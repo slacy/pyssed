@@ -15,7 +15,6 @@ It was written for easy inclusion and use from virtually any web framework:
 Pylons, web2py, Django, etc.  It's just a Python library, and not tied to
 any framework in particular.
 
-
 Background:
 ===========
 When doing web development, one must work in several languages and syntaxes
