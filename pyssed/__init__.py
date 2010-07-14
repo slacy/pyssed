@@ -3,7 +3,8 @@ import copy
 
 
 class style(object):
-    """Represents an array of CSS styles."""
+    """A list of CSS styles, but stored as a dict.
+    Can contain nested styles."""
 
     def __init__(self, *args, **kwargs):
         self._styles = {}
@@ -14,12 +15,15 @@ class style(object):
             self._styles[name] = value
 
     def iteritems(self):
+        """Return iterable contents."""
         return self._styles.iteritems()
 
     def append(self, other):
+        """Append syle 'other' to self."""
         self._styles = self.__add__(other)._styles
 
     def __add__(self, other):
+        """Add self and other, and return a new style instance."""
         summed = copy.deepcopy(self)
         if isinstance(other, str):
             single = other.split(':')

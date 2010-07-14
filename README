@@ -8,15 +8,15 @@ Steve Lacy (slacy@slacy.com)
 
 Description:
 ============
-This is a simple library for expressing CSS selectors & rules in Python, and
-generating a syntactically correct CSS file as output.
+This is a simple library for expressing CSS selectors & style rules in
+Python, then generating a syntactically correct CSS file as output.
 
 It was written for easy inclusion and use from virtually any web framework:
 Pylons, web2py, Django, etc.  It's just a Python library, and not tied to
 any framework in particular.
 
-Background:
-===========
+Background & Motivation:
+=======================
 When doing web development, one must work in several languages and syntaxes
 concurently.  Typically, you will have 4 or more languages to work with:
 
@@ -25,10 +25,10 @@ concurently.  Typically, you will have 4 or more languages to work with:
 - CSS
 - JavaScript
 
-Often times, context switching between languages can lead to simple editing
-mistakes, like missing (or adding) semicolons at the end of lines, etc.
+Context switching between languages can lead to editing mistakes, like
+missing (or adding) semicolons at the end of lines, etc.
 
-In addition, CSS is a very lightweight syntax, missing many key features.
+In addition, CSS2 has a very lightweight syntax, missing many key features.
 Because of this, several CSS helper libraries and alternate syntaxes have
 arisen.  For example:
 
@@ -42,15 +42,18 @@ Clever CSS: "the pythonic way of webdesign"
 http://sandbox.pocoo.org/clevercss/
 
 But, none of these helper libraries actually use native Python for
-generating the CSS itself, and all of them are just "another language" with
-some CSS-isms and a few extensions.  This just compounds the problem even
-more.
+generating the CSS itself, and all of them are "just another language" with
+some CSS-isms and a few extensions to make the developer's life a bit
+easier.  But, this just compounds the multi-language problem even more.
 
 I want to write my stylesheets in Python.  I have a web framework that can
 take Python and generate HTML, so why not have it generate syntactically
 correct CSS as well?
 
 That's exactly what pyssed is for.
+
+What it does is best expressed in some examples.  Please browse the examples
+directory for some more fun stuff.
 
 Examples:
 =========
